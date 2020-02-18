@@ -27,8 +27,9 @@
     "redux": "^4.0.5"
   },
   "devDependencies": {
-    "babel-preset-expo": "~8.0.0",
-    "@babel/core": "^7.0.0"
+    "@babel/core": "^7.0.0",
+    "@expo/vector-icons": "^10.0.6",
+    "babel-preset-expo": "~8.0.0"
   },
   "private": true
 }
