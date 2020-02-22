@@ -60,13 +60,18 @@ export default (state = initialState, action) => {
     case ADD_ORDER:
       return initialState;
     case DELETE_PRODUCT:
-      if (!state.items[action.pid]) {
+      if (!state.items || !state.items[action.pid]) {
         return state;
       }
 
       const updatedItems = { ...state.items };
+      const itemTotal = state.items[action.pid].sum;
       delete updatedItems[action.pid];
     default:
-      return state;
+      return {
+        ...state,
+        items: updatedItems,
+        totalAmount: state.totalAmount - itemTotal
+      };
   }
 };
