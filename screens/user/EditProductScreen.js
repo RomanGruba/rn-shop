@@ -36,10 +36,10 @@ const EditProductScreen = props => {
       );
     } else {
       dispatch(
-        productsAction.createProduct(title, description, imageUrl, price)
+        productsAction.createProduct(title, description, imageUrl, +price)
       );
     }
-  }, []);
+  }, [dispatch, prodId, title, description, imageUrl, price]);
 
   useEffect(() => {
     props.navigation.setParams({ submit: submitHandler });
