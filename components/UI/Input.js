@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
 
 const INPUT_CHANGE = "INPUT_CHANGE";
@@ -28,6 +28,14 @@ const Input = props => {
     isValid: props.initiallyValid,
     touched: false
   });
+
+  const { onInputChange, id } = props;
+
+  useEffect(() => {
+    if (inputState.touched) {
+      onInputChange(id, inputState.value, inputState.isValid);
+    }
+  }, [inputState, onInputChange, id]);
 
   const textChangeHandler = text => {
     const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -61,12 +69,14 @@ const Input = props => {
       <TextInput
         {...props}
         style={styles.input}
-        value={formState.inputValues.title}
+        value={inputState.value}
         onChangeText={textChangeHandler}
         onBlur={lostFocusHandler}
       />
-      {!formState.inputValidities.title && (
-        <Text style={{ color: "red" }}>{props.errorText}</Text>
+      {!inputState.isValid && inputState.touched && (
+        <View style={styles.errorContainer}>
+          <Text style={styles.errorText}>{props.errorText}</Text>
+        </View>
       )}
     </View>
   );
@@ -85,6 +95,14 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     borderBottomColor: "#ccc",
     borderBottomWidth: 1
+  },
+  errorContainer: {
+    marginVertical: 5
+  },
+  errorText: {
+    color: "red",
+    fontFamily: "open-sans",
+    fontSize: 12
   }
 });
 
