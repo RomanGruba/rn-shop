@@ -55,7 +55,7 @@ export const deleteProduct = productId => {
 };
 
 export const createProduct = (title, description, imageUrl, price) => {
-  return async dispatch => {
+  return async (dispatch, getState) => {
     const response = await fetch(
       "https://rn-shop-595a4.firebaseio.com/products.json",
       {
@@ -87,9 +87,10 @@ export const createProduct = (title, description, imageUrl, price) => {
 };
 
 export const updateProduct = (id, title, description, imageUrl) => {
-  return async dispatch => {
+  return async (dispatch, getState) => {
+    const token = getState().auth.token;
     const response = await fetch(
-      `https://rn-shop-595a4.firebaseio.com/products/${id}.json`,
+      `https://rn-shop-595a4.firebaseio.com/products/${id}.json?auth=${token}`,
       {
         method: "PATCH",
         headers: {
