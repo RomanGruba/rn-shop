@@ -45,9 +45,12 @@ const EditProductScreen = props => {
   const [error, setError] = useState();
 
   const prodId = props.navigation.getParam("productId");
-  const editProduct = useSelector(state =>
-    state.products.userProducts.find(product => product.id === prodId)
-  );
+  let editProduct;
+  if (prodId) {
+    editProduct = useSelector(state =>
+      state.products.userProducts.find(product => product.id === prodId)
+    );
+  }
 
   const dispatch = useDispatch();
 
