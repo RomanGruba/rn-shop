@@ -9,6 +9,7 @@ import ShopNavigator from "./navigation/ShopNavigator";
 import { AppLoading } from "expo";
 import * as Font from "expo-font";
 import ordersReducer from "./store/reducers/ordersReducer";
+import NavigationContainer from "./navigation/NavigationContainer";
 
 const rootReducer = combineReducers({
   products: productsReducer,
@@ -40,7 +41,7 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <ShopNavigator />
+      <NavigationContainer />
     </Provider>
   );
 }

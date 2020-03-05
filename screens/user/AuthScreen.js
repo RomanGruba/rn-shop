@@ -124,7 +124,7 @@ const AuthScreen = props => {
               id="password"
               label="Password"
               keyboardType="default"
-              //secureTextEntry
+              secureTextEntry
               minLength={5}
               required
               autoCapitalize="none"
